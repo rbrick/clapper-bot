@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -10,7 +11,7 @@ import (
 const clapEmoji = '👏'
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("395173942:AAHpz_VEacfdIdEDhGMDEHl5oZLcr6q232A")
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_API_KEY"))
 	if err != nil {
 		log.Fatal(err)
 	}
