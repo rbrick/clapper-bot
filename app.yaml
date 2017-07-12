@@ -1,6 +1,7 @@
-application: clapper-bot
 runtime: go
 api_version: go1
 handlers:
 - url: /.*
   script: _go_app
+env_variables:
+  TG_BOT_TOKEN: 'change me'

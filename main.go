@@ -9,8 +9,8 @@ import (
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-func main() {
-	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_API_KEY"))
+func init() {
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_BOT_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
 	}
