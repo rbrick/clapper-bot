@@ -2,13 +2,12 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
-
-const clapEmoji = '👏'
 
 func main() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_API_KEY"))
@@ -17,21 +16,22 @@ func main() {
 	}
 
 	bot.Debug = true
-	log.Printf("ClapperBot started...")
 
-	updateConfig := tgbotapi.NewUpdate(0)
-	updateConfig.Timeout = 60
-
-	updateChan, err := bot.GetUpdatesChan(updateConfig)
-
+	_, err = bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://clapper-bot.appspot.com:8443/"+bot.Token, "cert.pem"))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	for update := range updateChan {
+	log.Printf("[ClapperBot] ClapperBot started...")
+
+	updates := bot.ListenForWebhook("/" + bot.Token)
+	go http.ListenAndServeTLS("0.0.0.0:8443", "cert.pem", "key.pem", nil)
+
+	for update := range updates {
 		if update.InlineQuery != nil {
 			query := update.InlineQuery
 			clapifiedMessage := clapify(query.Query)
+
 			log.Printf("[ClapperBot] Message: [%s], User: [%s]\n", query.Query, query.From.UserName)
 			log.Printf("[ClapperBot] Clapified message [%s]\n", clapifiedMessage)
 
@@ -53,6 +53,8 @@ func main() {
 }
 
 func clapify(s string) string {
+	var clapEmoji = '👏'
+
 	strs := strings.Split(s, " ")
 	ns := ""
 
