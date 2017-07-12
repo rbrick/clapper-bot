@@ -2,7 +2,6 @@ package clapperbot
 
 import (
 	"log"
-	"net/http"
 	"os"
 	"strings"
 
@@ -25,7 +24,7 @@ func init() {
 	log.Printf("[ClapperBot] ClapperBot started...")
 
 	updates := bot.ListenForWebhook("/" + bot.Token)
-	go http.ListenAndServeTLS("0.0.0.0:8443", "cert.pem", "key.pem", nil)
+	// go http.ListenAndServeTLS("0.0.0.0:8443", "cert.pem", "key.pem", nil)
 
 	for update := range updates {
 		if update.InlineQuery != nil {
