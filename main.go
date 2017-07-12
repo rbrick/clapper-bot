@@ -8,8 +8,6 @@ import (
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-const clapEmoji = '👏'
-
 func main() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_API_KEY"))
 	if err != nil {
@@ -17,7 +15,7 @@ func main() {
 	}
 
 	bot.Debug = true
-	log.Printf("ClapperBot started...")
+	log.Printf("[ClapperBot] ClapperBot started...")
 
 	updateConfig := tgbotapi.NewUpdate(0)
 	updateConfig.Timeout = 60
@@ -53,6 +51,7 @@ func main() {
 }
 
 func clapify(s string) string {
+	var clapEmoji = '👏'
 	strs := strings.Split(s, " ")
 	ns := ""
 
