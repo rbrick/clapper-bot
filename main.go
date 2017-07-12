@@ -16,14 +16,14 @@ func init() {
 
 	bot.Debug = true
 
-	_, err = bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://clapper-bot.appspot.com:8443/"+bot.Token, "cert.pem"))
+	_, err = bot.SetWebhook(tgbotapi.NewWebhook("http://clapper-bot.appspot.com/webhook/" + bot.Token))
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	log.Printf("[ClapperBot] ClapperBot started...")
 
-	updates := bot.ListenForWebhook("/" + bot.Token)
+	updates := bot.ListenForWebhook("/webhook/" + bot.Token)
 	// go http.ListenAndServeTLS("0.0.0.0:8443", "cert.pem", "key.pem", nil)
 
 	for update := range updates {
