@@ -1,4 +1,4 @@
-package main
+package clapperbot
 
 import (
 	"log"
