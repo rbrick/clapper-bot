@@ -5,3 +5,6 @@ handlers:
   script: _go_app
 env_variables:
   TG_BOT_TOKEN: 'change me'
+network: 
+  forwarded_ports:
+    - 8443/tcp
