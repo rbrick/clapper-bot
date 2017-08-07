@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	"gopkg.in/telegram-bot-api.v4"
 )
 
 func main() {
