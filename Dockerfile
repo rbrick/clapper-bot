@@ -6,6 +6,7 @@ RUN addgroup -S clapper-bot && adduser -S -D clapper-bot clapper-bot
 
 USER clapper-bot
 WORKDIR "/home/clapper-bot"
+ENV GOPATH="/home/clapper-bot"
 
 # Install dep
 RUN go get -u github.com/golang/dep/cmd/dep
